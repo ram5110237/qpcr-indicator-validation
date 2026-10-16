@@ -1,0 +1,36 @@
+# Paths are relative to this file. Remove a block to skip that module.
+outdir: ../results/example
+
+reference_genes:
+  file: ../data/example/reference_ct.tsv
+  candidates: [EF1a, UBQ, H3, 18S, TUB, ACT, CYP, GAPDH]
+  group_column: condition        # used by NormFinder and for relative expression
+  target: CYP51                  # optional: target gene to normalise
+  control: control
+
+standard_curve:
+  file: ../data/example/standard_curve.tsv
+  min_quantity_for_curve: 100    # fit efficiency only where sampling noise is negligible
+  max_cv_loq: 35
+
+markers:
+  file: ../data/example/marker_panel.tsv
+  reference: sequencing_resistant
+  scores: [asqpcr_dcq, hrm_score, expr_ratio]
+  call_marker: asqpcr_dcq        # marker used for a binary diagnostic call
+  call_threshold: 0
+  call_direction: below          # resistant if score < threshold
+  cv_folds: 5
+  cv_repeats: 20
+
+dose_response:
+  file: ../data/example/dose_response.tsv
+  reference_isolate: REF
+  fix_lower: 0                   # growth cannot fall below 0%; set to null to estimate
+
+multi_env:
+  file: ../data/example/multi_env.tsv
+  response: value
+  entry: entry
+  env: env
+  bootstrap_n: 200
